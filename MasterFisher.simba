@@ -1,0 +1,138 @@
+program route30fisher;
+{$i srl-6/srl.Simba}
+const
+  Poke_to_kill = 1;
+
+var
+  kill, real, X, Y, magikarp, poliwhirl, shellder, wailmer, button, clamperl, fight, finneon, horsea, gyarados, marill, tentacruel, corphish, tentacool, kingdra, learn, remoraid, staryu, poliwag, dead, seaking, goldeen, continue, krabby, kingler: integer;
+  battle, pokey: boolean;
+
+procedure bitmapz;
+begin
+  poliwhirl := BitmapFromString(20, 19, 'meJx7sGPDA0LoQEMBVgSRTbBQACI0LUARXLoo1wtBDREBQISLSzu9ZKMdO3b8IAIAlVFRL0SwggiAbMUOMKBELzG6cBkC4RLjX1xGkaeXGPfDQwbNEDyOweO8ADCgRC9WKTSA5iOsIUCqXojVcDUB2ABcFk07APO44R8=');
+  shellder := BitmapFromString(18, 13, 'meJw70DHjABLqiCiAILjIix0HMN' + 'EBynQRoxgNAdUTo4xCXRCHfbhxA4KIVE+JLjgCisNNQDMErgBPyCO' + 'rgSijXBcjDCRYeAARmiHI5iC7lhEHQDMEyMZqF0m6ACxgrYk=');
+  wailmer := BitmapFromString(23, 17, 'meJw7sGPDjx8/DuzYcADMmNHRAE' + 'QeBgoQ1LDhBDKCCM7IMEBDcPXIaMGFFxCEZgjcKDRDIIo9EjKACK4' + 'XvyGYTqKWIQkdMzC14zcKYmlFgAUQUdEQrB4hyVP4DYEoxmMOxCha' + 'GwLRjsagkUsgCmhqCJHeoakhaL4g0juYuohxAHUNAQBmNvc/');
+  button := BitmapFromString(10, 8, 'meJzziX2kb38AP/KJfYQVQaTw6MJ' + 'v5oDIAgCqJmPU');
+  fight := BitmapFromString(25, 27, 'meJztlMtu2lAQhvs0CAkhEOJWQ0' + 'JCIDVgGwcToALfwNSApUhcCpQAKrABuqzyEG3SdbttHyJkyzLNOtu' + 'qf2wVuQXRBXTXX0dH4+M535mZM/b9/d70fX8yY5/tJjPn3W7aF8dA' + '/cGZTqeDwaDT6WCGPZvNxuPxpa7hcIi51Wo1Go1ms9ntdkejEXzm8' + '/lGFAg8z8fj8Xw+3+v14FytVlO6sJJOp6PRaCgUCofDiUSiUCjU6/' + 'XJZALaOgqHwvlC+0FTbzVNa7fbgBTFO4xgMJhOfcIrYyjykqauGOa' + 'JhtjWUQgeh8KTfNEXRbFWq8ViMUlYYLhcrjP2uiQvj486kZM3KfZa' + 'P/FKEAQEvwV1Eu4CkkwmEYwZBYMgiEgk4vf7JX4hC3ccx/X7/S2oX' + 'OZrir3hzm6wXVUezCifzwe+13uqVR6z519yuRxuZIWq/lImk3E6nU' + 'AVpaVQuBULt5hr6iMMi8XCUB9gC/oifF4pDwTxkmXZcrm8BUU8bzg' + 'cDrfbbbPZDKaBwnbMSfpjMKB6vV4UAbXCxi2ow4PXKAhFUR6PRzSh' + 'gLXb7SgCwzBITZIkVVU3orLZLGoCVOiwTdM0HgOBgIGyWq1AwUDBc' + 'SKSqlQqq43rKHTd05Xxi+MjDVeDdkVs59xnDCQbJ9/DwAr6pPq71l' + 'HFYhENgGZGavBXFAUBnOpCRvgKSJI0QtqIQsArGhIHDRDMRhGwS9J' + 'VKpWwKMvyOsdAmWm7yPy/8u+mf/EX/a+/6tv+tMeofgKuxlV0');
+  clamperl := BitmapFromString(25, 21, 'meJy1lLERwjAMRVfwKIxAyQiUjJ' + 'CSMTIGJSUlI1Cm9BgqEXz4J0s+J5ezfe9S+KRnWbaT50v+cz0elPN' + 'pet0E3KeF6DxIKSGSpO+ABDHMqqqsM5sCWENflZVsBEs7YUeV7TMC' + '2rtrC3EoOighmHe5UWV71UWliHhDVRhb6m6XPGf92kTbLts0rkiJL' + 'I+CkapI3JdmfcAYo+IRbJHg0H+qcoP2Ea3eSa8qGaRyNzB63KOrqu' + 'KrjETVKrtV9gfYKBWRDQPponoDkBK1Pg==');
+  horsea := BitmapFromString(19, 15, 'meJz7cWPHDzB6cWABHG2YkAFHyO' + 'IQxAgGP8jViCkOVPwDCWDqTQiwACJMjT9QwYULF3CppFwjxFMFBT8' + 'gCA5orREYYrg04gpt/BrhWjAdQLZGCELzI5oL8SQMeBRjWoRHC3ka' + 'sToJjhhRAdkaAXbiHzI=');
+  tentacruel := BitmapFromString(14, 16, 'meJwTEGj4AQYrdoCQgEDDigkOQN' + 'QQoABBEO6DDRkCRKuEKAAiBY0NEARUDFEPlEVGcAUBDh8giBEMKFE' + 'JtAiuBoiAXFwqgSKMqADiBUpUQhTDgwWPMpJUQhBEJR4FcDPxuw0a' + 'TUSrRLMXWSMcQbyA5hdkWTi6cOEC8SoB+GRMSA==');
+  tentacool := BitmapFromString(15, 16, 'meJx7sCFjxQQHIBIQyPAI+AFHQC' + '5E/MGGDGREkmK4FqACOMKljHjF+E0YQNQQoABEtFMMCWQ0hDV8gAi' + 'rerIVI4vjV4wmTrliNAVwxMDAgBksAINvipA=');
+  kingdra := BitmapFromString(10, 14, 'meJxjYGCIcFCY0ZCBiYDiAQduAB' + 'FW2RMrGoBSK378QFMDFIcg/LIKCRWYsg0ZHhCEXxYoCFQAkQU6Es3' + '9EI1ABUAEl4UwGBgYiJHF6mugLMRSTBuJkQWajGwjSbIA08nEgQ==');
+  remoraid := BitmapFromString(14, 16, 'meJy7cGPDBSLQhgMNxCgjFe1Y0Q' + 'FBZGiBoIYIDWREnkoIgkt9+HABghjBgAyVCzoS4LbA1UCUIasBIuS' + 'ABbKBCG4U3OXEq0QzHOgAXF4YQER8WgKqBAAEYMup');
+  kingler := BitmapFromString(9, 8, 'meJwL6PgRQDPECANESkFEFAw8yJOC' + 'IAgXALCFW/8=');
+  goldeen := BitmapFromString(15, 13, 'meJyrOPCDPOBQ8QKIBBwuQBCEi1' + 'UlULbiwA8IgiiDIAaBBrIVwy2FOwANAdXDtZChGIgWrHCAIDQXRgQ' + 'EABGEPaGjA4jgaoDiaFogCshQDAFAWYh1aIrRlCGrhyCIFkwDyVZM' + 'EAAANdyhKA==');
+  continue := BitmapFromString(22, 21, 'meJwzcDhoMIpwIM/wEwXVV6bPfw' + 'BBYclniNcLVPz0+XcgOn3+PQQB2f///wcaSKTVnz7/BiIgA00QaAg' + 'xLtm4/TlQJbJ2uCFAcaAsQROAdgGdjct3yG7Yd/j1fxiACybnXwBy' + 'gVJEOrVr8h2gFiBCMwEY8gSDGpdFECmCJgAV4IkaYnwBMQHZ8cgIG' + 'PXAwMQlBQlk/CZAgqi2/QaaOCSIILEJdD8ez9p4H4GkKGA4w1MFkI' + '2WzCBOxZXAgOKQFIgMgO5HVg9k37j9GZJ4cKUfoLPh2QprsANdC/Q' + 'sRAHB9DMkEADvfKIO');
+  poliwag := BitmapFromString(10, 10, 'meJzb0FBxY8MKNLShoQKIJiR4bC' + 'AkiwsxMjJC1CAj4mWB3BU7fkBQRgYIwRVAFOORBXIZYQAiCxcBKvC' + 'I2IGJiJQFAEoAkSU=');
+  magikarp := BitmapFromString(13, 11, 'meJxzYGhwYGiQSPiAhhxQxR2IUw' + 'YXJEYZ2bbgUhagsAOIkNVgVYbLTEqUIVuNx5G4lGGKo9nFAAYAyxu' + 'uoQ==');
+  dead := BitmapFromString(14, 16, 'meJzr7qYUZGKA4uLiioqKxsbGjo' + '6Orq4uuEoGDODk5OTt7R0TE1NYWNjc3AxU3NPTA1GpiQrysv+lJD7' + '09Znq5wdSDDQZl0oX58qggNVA9UDFcXFxQGfAbUdX6eJiYWGREHs9' + 'Me5GcHBwTU0NLpU2NjZmZm7ZGV/DQ3dERETU1dXhUhkXcw1odVrKa' + 'yuryICAgNTUVGCAYFXp77vKxjrdzMzM09MT6E5I0GFVaW9v7+fnB7' + 'Q3ISEhPT0dj8qwsDCgjRkZGcjRgVVlfHw8ZsRhVQnxAjEqMZXBVaI' + 'B4lMXAGGu5Eo=');
+  krabby := BitmapFromString(8, 8, 'meJyzsLhhUPADDVlY3LDAIY4pCEEC' + 'AQUQXUAEZCMjrOIHHvxAZiMjXOJYEQAevWhh');
+  staryu := BitmapFromString(12, 12, 'meJwzuPHCAAk5ZDQA0YIPP5ARRB' + 'CCNCacQJM1cIgAImLUoAlCpYD2gmWBujA1YlUDtwWIgFJwR8JFgEh' + 'AYQUQOTh8AKGMBrjvkD1LvBqESrDV8ICCuAqrGjQvUEsNACtq82k=');
+  seaking := BitmapFromString(19, 19, 'meJxjZEQBPz580HA4AEQOBQ8gCF' + 'WeUcJgAhBhilOiES6FVSMEIIt3NFQAER00JkREwLVAPAjXgl8jRD1' + 'mmNBOI0Q9ZvgTjA6yNcIRRATZMSQlADQzkY2CALgLqaURzf2YBlKu' + 'EVfEYWqEqIckMyDC5Uc098AtenDjBgSRrREt3OBa0KIVUyMAwBMeGg==');
+  learn := BitmapFromString(30, 17, 'meJy9lElrYkEUhX+nK/0PLiK4da' + 'koghtBRFFRjPM844TGqR1eN4o4oK3EYSG6SFzZH68wpAn0xtB3UZx' + '36ta5o0qS9PNb7dfdvlf2vylLkjQajYbDIaf0cHM+lJHq9/utVqvR' + 'aHCCHxT/UCbVZrNZLBbr9TonGOZrIR+fg8Fg+MkGsn1mRGIowxcKB' + 'TRvtxsnWDi/vLxUKpVSqcRJOMqpVqv5fD6TyeBTkQ1/mFwuh1vxbm' + 'TY6/VIg/JTqVQikUCZE9zpdOhMMpl8fn7mldfrjUajXPn9fkAsFot' + 'EIm63m890Os0tV4FAgCubzUZcbtFHHGWc4VEWD2u1WjweL5fL1+v1' + '/f2dk0+LxXI8Hm93g0EcgMNqteLJfr+fTqcwl8vF5/PBfFWmWJfLd' + 'T6fqUulUi2XS56YTCZ6SFYU8vb2xkNi8eR0OjmdTroBpjOidtIGC2' + 'UwDAV6PB5KI+jtb3t6elosFoDNZoPybDYzGo180j21Wk2BYI1GY7V' + 'aAQjCo0ygcDgM43A4DAYDyYhXRFEqlaSEP54wZrNZoVCgPJ/PwcJH' + 'p9MxF7BWq8VZKDMm1oC20zeY3W63Xq/JitHQAXpIK+C73S79AUwmk' + '/F4LHg6IxpIJjiA9Xo99QIQzGazdI9awNvt9rdsABgeMmIwK0didr' + 'udPUSQEGKN2YrX11cUAOwkEyRhyj8cDmJXWTzWDJFgMIgCE2dGlEA' + '55AMJZvcYKw2BCYVCtI65wFNaSTZuCZGXDczmUwU/GXJg/UipLhtJ' + 'EqsrW7vd5uzLhg98+27C54dsXIF7svFJRST84P/PP/43/gBGZr/l');
+  corphish := BitmapFromString(14, 16, 'meJybcOLBBDBysMgAIoGGHxwRD7' + 'CiCaSrhCABIGj4gVU92SodEhoEIABDMbIaIMJjOEkq0dRQrhJTDYp' + 'iAQGIMqAWXMrgKuEmU64S7iq4eqxq0IOLXJUQBdiDC6wSAI1oa1g=');
+  gyarados := BitmapFromString(16, 19, 'meJxLWHEigRCa0SAARwQVo2kZVU' + '+5elLDn3bqkVUCUYGDBLXUwxVAkIJDBBABxSEMNARXhulmUtUT42y' + 'qq8elBehCAPvs3JA=');
+  marill := BitmapFromString(18, 18, 'meJx7MSPiBRGowELiRIMDEEG4Kz' + 'IMCKoHoh8/fjCCAVwQWRaXLkYYoEQXLhfCvQDxDlAjUCVcMXm6gCI' + 'QLsQlcFm4rpGFHhz4gQMApUAImy5cWrCYQC9daM4mVRf9AQAY/Z3f');
+  finneon := BitmapFromString(18, 16, 'meJyLcDCIgCELDY0IJC4mqnAoWD' + 'EBhODqCWqhXBfx6uFayNZFUD1VdBHpNrJ1kREOQDTB4wBcS0dGABD' + 'RQhdQPUQLRPGDCxMgiHJdEJ8iI4guZPXIuiBqfvx4AVEG1wVRA7EI' + 'iODi5OkCANuWHkA=');
+end;
+
+function battleCheck: boolean;
+begin
+  if FindBitmapToleranceIn(fight, X, Y, 336, 137, 390, 158, 33) then
+    battle := true
+  else
+    battle := false;
+end;
+
+procedure Xmove;
+begin
+  repeat
+    mouseOval(782, 159, 5, 5, MOUSE_LEFT);
+    wait(400);
+  until (FindBitmapToleranceIn(learn, X, Y, 500, 150, 537, 170, 50) = false);
+end;
+
+procedure attackIt;
+begin
+  repeat
+  if FindBitmapToleranceIn(button, X, Y, 358, 396, 392, 425, 50) then
+    begin
+    mouseOval(437, 427, 20, 10, MOUSE_LEFT);
+    wait(150);
+    mouseOval(437, 427, 20, 10, MOUSE_LEFT);
+    sleep(1700);
+  end;
+  if FindBitmapToleranceIn(continue, X, Y, 625, 447, 670, 473, 33) then
+  begin
+    mouseOval(634, 451, 5, 5, MOUSE_LEFT);
+  end;
+  battlecheck;
+ until(battle=false);
+  IncEx(kill, 1);
+  Writeln('We have killed ' + IntToStr(kill) + ' pokemon');
+end;
+
+procedure freebmapz;
+begin
+  freebitmap(gyarados);
+  freebitmap(tentacruel);
+  freebitmap(staryu);
+  freebitmap(magikarp);
+  freebitmap(continue);
+  freebitmap(dead);
+  freebitmap(krabby);
+  freebitmap(kingler);
+  freebitmap(goldeen);
+  freebitmap(seaking);
+  freebitmap(remoraid);
+  freebitmap(poliwag);
+  freebitmap(kingdra);
+  freebitmap(learn);
+  freebitmap(corphish);
+  freebitmap(tentacool);
+  freebitmap(marill);
+  freebitmap(horsea);
+  freebitmap(clamperl);
+  freebitmap(finneon);
+  freebitmap(fight);
+  freebitmap(button);
+  freebitmap(shellder);
+  freebitmap(poliwhirl);
+end;
+
+function pokemon: boolean;
+begin
+        if FindBitmapToleranceIn(poliwhirl, X, Y, 844, 167, 921, 243, 33) or FindBitmapToleranceIn(shellder, X, Y, 860, 192, 922, 237, 33) or FindBitmapToleranceIn(wailmer, X, Y, 856, 179, 915, 242, 33) or FindBitmapToleranceIn(finneon, X, Y, 869, 202, 903, 234, 33) or FindBitmapToleranceIn(clamperl, X, Y, 869, 202, 903, 234, 33) or FindBitmapToleranceIn(horsea, X, Y, 865, 179, 905, 222, 33) or FindBitmapToleranceIn(marill, X, Y, 856, 200, 892, 227, 33) or FindBitmapToleranceIn(gyarados, X, Y, 878, 154, 924, 212, 33) or FindBitmapToleranceIn(tentacruel, X, Y, 864, 162, 910, 200, 33) or FindBitmapToleranceIn(tentacool, X, Y, 864, 185, 923, 239, 33) or FindBitmapToleranceIn(corphish, X, Y, 864, 185, 923, 239, 33) or FindBitmapToleranceIn(kingdra, X, Y, 852, 185, 895, 225, 33) or FindBitmapToleranceIn(poliwag, X, Y, 864, 198, 906, 223, 33) or FindBitmapToleranceIn(remoraid, X, Y, 864, 198, 906, 223, 33) or FindBitmapToleranceIn(seaking, X, Y, 868, 297, 899, 330, 33) or FindBitmapToleranceIn(goldeen, X, Y, 853, 198, 895, 234, 33) or FindBitmapToleranceIn(staryu, X, Y, 867, 188, 905, 217, 33) or FindBitmapToleranceIn(kingler, X, Y, 910, 157, 952, 200, 33) or FindBitmapToleranceIn(krabby, X, Y, 866, 216, 891, 236, 33) or FindBitmapToleranceIn(magikarp, X, Y, 871, 173, 903, 191, 33) then
+    pokey := true
+  else
+    pokey := false;
+end;
+
+procedure findit;
+begin
+  if pokey = true then
+  begin
+    wait(randomrange(2112, 2324));
+    attackIt;
+  end;
+  if FindBitmapToleranceIn(learn, X, Y, 500, 150, 537, 170, 50) then
+  begin
+    writeln('Found level up window, lets close it');
+    Xmove;
+  end;
+end;
+
+begin
+  mousespeed := 400;
+  activateclient;
+  bitmapz;
+  Addonterminate('freebmapz');
+  repeat
+    repeat
+      pokemon;
+      findit;
+    until (battle = true);
+  until kill = poke_to_kill;
+  freebmapz;
+  terminatescript();
+end.
